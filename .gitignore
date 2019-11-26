@@ -2,3 +2,6 @@ node_modules
 .DS_Store
 modules
 *.log
+dist/
+coverage/
+.rts2_cache*

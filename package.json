@@ -1,20 +1,18 @@
 {
-  "name": "shallowequal",
+  "name": "@darthtrevino/shallowequal",
   "version": "1.1.0",
   "description": "Like lodash isEqualWith but for shallow equal.",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "module": "dist/shallowequal.esm.js",
+  "typings": "dist/index.d.ts",
   "scripts": {
-    "lint": "eslint index.js test",
-    "test": "jest .",
-    "prepare": "npm run flow:check && npm run pretty && npm run lint && npm run test",
-    "travis": "npm run flow:check && npm run lint && npm run test",
-    "pretty": "prettier --write --tab-width 2 'test/**/*.js' '*.{js,json,js.flow,md}'",
-    "precommit": "lint-staged",
-    "flow:check": "flow check"
+    "build": "tsdx build",
+    "lint": "tsdx lint",
+    "test": "tsdx test"
   },
   "lint-staged": {
-    "*.{js,json,js.flow,md}": [
-      "prettier --write",
+    "*": [
+      "pretty-quick --staged",
       "git add"
     ]
   },
@@ -23,13 +21,8 @@
     "email": "mailforalberto@gmail.com",
     "url": "github.com/dashed"
   },
-  "repository": "dashed/shallowequal",
+  "repository": "darthtrevino/shallowequal",
   "license": "MIT",
-  "files": [
-    "index.js",
-    "index.js.flow",
-    "index.original.js"
-  ],
   "keywords": [
     "shallowequal",
     "shallow",
@@ -38,31 +31,12 @@
     "compare",
     "isequalwith"
   ],
-  "eslintConfig": {
-    "parser": "babel-eslint",
-    "env": {
-      "browser": true,
-      "node": true,
-      "jest": true
-    },
-    "extends": [
-      "eslint:recommended"
-    ],
-    "plugins": [
-      "jest"
-    ]
-  },
   "devDependencies": {
-    "@babel/core": "7.7.2",
-    "@babel/preset-env": "7.7.1",
-    "babel-eslint": "10.0.3",
-    "babel-jest": "24.9.0",
-    "eslint": "6.7.1",
-    "eslint-plugin-jest": "23.0.4",
-    "flow-bin": "0.112.0",
+    "@types/jest": "^24.0.23",
     "husky": "3.1.0",
-    "jest": "24.9.0",
     "lint-staged": "9.4.3",
-    "prettier": "1.19.1"
+    "prettier": "1.19.1",
+    "pretty-quick": "^2.0.1",
+    "tsdx": "^0.11.0"
   }
 }

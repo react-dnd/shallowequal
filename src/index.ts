@@ -1,6 +1,10 @@
-//
 
-module.exports = function shallowEqual(objA, objB, compare, compareContext) {
+export default function shallowEqual<T>(
+  objA: T,
+  objB: T,
+  compare?: (a: T, b: T) => number,
+  compareContext?: any
+) {
   var ret = compare ? compare.call(compareContext, objA, objB) : void 0;
 
   if (ret !== void 0) {
@@ -43,4 +47,4 @@ module.exports = function shallowEqual(objA, objB, compare, compareContext) {
   }
 
   return true;
-};
+}
