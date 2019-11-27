@@ -1,21 +1,21 @@
-
-export default function shallowEqual<T>(
+export function shallowEqual<T>(
   objA: T,
   objB: T,
-  compare?: (a: T, b: T) => number,
+  compare?: (a: T, b: T, key?: string) => boolean | void,
   compareContext?: any
 ) {
-  var ret = compare ? compare.call(compareContext, objA, objB) : void 0;
-
-  if (ret !== void 0) {
-    return !!ret;
+  var compareResult = compare
+    ? compare.call(compareContext, objA, objB)
+    : void 0;
+  if (compareResult !== void 0) {
+    return !!compareResult;
   }
 
   if (objA === objB) {
     return true;
   }
 
-  if (typeof objA !== "object" || !objA || typeof objB !== "object" || !objB) {
+  if (typeof objA !== 'object' || !objA || typeof objB !== 'object' || !objB) {
     return false;
   }
 
@@ -36,12 +36,17 @@ export default function shallowEqual<T>(
       return false;
     }
 
-    var valueA = objA[key];
-    var valueB = objB[key];
+    var valueA = (objA as any)[key];
+    var valueB = (objB as any)[key];
 
-    ret = compare ? compare.call(compareContext, valueA, valueB, key) : void 0;
+    compareResult = compare
+      ? compare.call(compareContext, valueA, valueB, key)
+      : void 0;
 
-    if (ret === false || (ret === void 0 && valueA !== valueB)) {
+    if (
+      compareResult === false ||
+      (compareResult === void 0 && valueA !== valueB)
+    ) {
       return false;
     }
   }

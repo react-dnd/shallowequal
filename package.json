@@ -5,17 +5,6 @@
   "main": "dist/index.js",
   "module": "dist/shallowequal.esm.js",
   "typings": "dist/index.d.ts",
-  "scripts": {
-    "build": "tsdx build",
-    "lint": "tsdx lint",
-    "test": "tsdx test"
-  },
-  "lint-staged": {
-    "*": [
-      "pretty-quick --staged",
-      "git add"
-    ]
-  },
   "author": {
     "name": "Alberto Leal",
     "email": "mailforalberto@gmail.com",
@@ -31,12 +20,29 @@
     "compare",
     "isequalwith"
   ],
+  "scripts": {
+    "start": "tsdx watch",
+    "build": "tsdx build",
+    "test": "tsdx test",
+    "lint": "tsdx lint"
+  },
+  "peerDependencies": {},
+  "husky": {
+    "hooks": {
+      "pre-commit": "tsdx lint"
+    }
+  },
+  "prettier": {
+    "printWidth": 80,
+    "semi": true,
+    "singleQuote": true,
+    "trailingComma": "es5"
+  },
   "devDependencies": {
     "@types/jest": "^24.0.23",
-    "husky": "3.1.0",
-    "lint-staged": "9.4.3",
-    "prettier": "1.19.1",
-    "pretty-quick": "^2.0.1",
-    "tsdx": "^0.11.0"
+    "husky": "^3.1.0",
+    "tsdx": "^0.11.0",
+    "tslib": "^1.10.0",
+    "typescript": "^3.7.2"
   }
 }
